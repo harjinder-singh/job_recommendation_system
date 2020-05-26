@@ -1,0 +1,14 @@
+{%block content%}
+
+{% for job in jobs%}
+    {{ forloop.counter }}
+    <br/>
+    Title: {{job.title}}
+    <br/>
+    Location: {{job.location}}
+    <br/>
+    <br/>
+    <br/>
+{% endfor%}
+
+{%endblock%}
