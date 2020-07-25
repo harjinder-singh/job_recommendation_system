@@ -56,17 +56,17 @@ df['keywords'] = [keywords_extract(job_desc) for job_desc in df['description']]
 
 #similarity function
 def get_jaccard_sim(x_set, y_set):
-
     intersection = x_set.intersection(y_set)
     return float(len(intersection)) / (len(x_set) + len(y_set) - len(intersection))
 
 def cal_similarity(resume_keywords):
-
+    resume_keywords = [x.lower() for x in resume_keywords]
     num_jobs_return = 10
     similarity = []
     if df.shape[0] < num_jobs_return:
         num_jobs_return = df.shape[0]
     for job_skills in df['keywords']:
+        job_skills = [x.lower() for x in job_skills]
         similarity.append(get_jaccard_sim(set(resume_keywords), set(job_skills)))
     df['similarity'] = similarity
     top_match = df.sort_values(by='similarity', ascending=False).head(num_jobs_return)
