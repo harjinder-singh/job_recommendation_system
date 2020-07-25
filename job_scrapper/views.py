@@ -9,6 +9,6 @@ from job_scrapper.jobs_recommend import *
 def index(request):
     jobs = []
     if(request.POST):
-        jobs = cal_similarity([request.POST['skills']] )
+        jobs = cal_similarity(request.POST['skills'].split(',') )
         jobs = jobs.to_numpy()
     return render(request, 'index.html', {'jobs': jobs})
