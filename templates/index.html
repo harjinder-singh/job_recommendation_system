@@ -35,46 +35,52 @@
                     <h2 class="title">Job Recommendation Form</h2>
                 </div>
                 <div class="card-body">
-                    <form method="POST">
-                        <div class="form-row m-b-55">
-                            <div class="name">Name</div>
-                            <div class="value">
-                                <div class="row row-space">
-                                    <div class="col-2">
-                                        <div class="input-group-desc">
-                                            <input class="input--style-5" type="text" name="first_name">
-                                            <label class="label--desc">first name</label>
+                    
+                        {%for job in jobs%}
+                        <h1>{{ forloop.counter0 }} {{job.5}} </h1>
+                            
+                        {%endfor%}
+                        <form method="POST">
+                            {% csrf_token%}
+                            <div class="form-row m-b-55">
+                                <div class="name">Name</div>
+                                <div class="value">
+                                    <div class="row row-space">
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-5" type="text" name="first_name">
+                                                <label class="label--desc">first name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-5" type="text" name="last_name">
+                                                <label class="label--desc">last name</label>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-2">
-                                        <div class="input-group-desc">
-                                            <input class="input--style-5" type="text" name="last_name">
-                                            <label class="label--desc">last name</label>
-                                        </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="name">Email</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <input class="input--style-5" type="email" name="email">
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">Email</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="email" name="email">
+                            <div class="form-row">
+                                <div class="name">Skills</div>
+                                <div class="value">
+                                    <div class="input-group-desc">
+                                        <input class="input--style-5" type="text" value="" name="skills" data-role="tagsinput" name="skills" style="background-color: aqua;">    
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">Skills</div>
-                            <div class="value">
-                                <div class="input-group-desc">
-                                    <input class="input--style-5" type="text" value="" data-role="tagsinput" name="skills" style="background-color: aqua;">    
-                                </div>
+                            <div>
+                                <button class="btn btn--radius-2 btn--red" type="submit">Find Jobs</button>
                             </div>
-                        </div>
-                        <div>
-                            <button class="btn btn--radius-2 btn--red" type="button">Find Jobs</button>
-                        </div>
-                    </form>
+                        </form>
                 </div>
             </div>
         </div>
