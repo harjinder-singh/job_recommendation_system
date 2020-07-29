@@ -10,7 +10,7 @@ from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 #!conda install python-snappy --y
 #!conda update -n base conda --y
 
-""" import s3fs
+import s3fs
 import fastparquet as fp
 s3 = s3fs.S3FileSystem()
 fs = s3fs.core.S3FileSystem()
@@ -23,8 +23,8 @@ myopen = s3.open
 #use s3fs as the filesystem
 fp_obj = fp.ParquetFile(all_paths_from_s3,open_with=myopen)
 #convert to pandas dataframe
-df = fp_obj.to_pandas() """
-df = pd.read_csv(r'job_scrapper/jobsCanada.csv')
+df = fp_obj.to_pandas()
+#df = pd.read_csv(r'job_scrapper/jobsCanada.csv')
 #Addind Index Column in data frame
 df['idx'] = range(1, len(df) + 1)
 
@@ -36,7 +36,15 @@ bigdata_tool = ['hadoop','mapreduce','spark','pig','hive','shark','oozie','zooke
 ml_platform = ['aws','azure','google','ibm']
 methodology = ['agile','devops','scrum']
 databases = ['sql','nosql','hbase','cassandra','mongodb','mysql','mssql','postgresql','oracle','rdbms','bigquery']
-overall_skills_dict = program_languages + analysis_software + ml_framework + bigdata_tool + databases + ml_platform + methodology
+softwareskills = ['asp','sql','html','c#','web','vb','react','linux','oops','docker','django','tomcat','aqualogic','jboss','websphere','ssis','boomi',
+'informatica','talend','ruby','css','node.js','angular','nginx','microservices','bitbucket','gitlab','github','wordpress','rest','soap','git','jenkins','kubernetes',
+'openshift','jquery','bootstrap','d3','j2eee','ejb','jsp','servlets','jdbc','eclipse','jboss']
+cloudskills =['saas','agile','devops','iot','oracle','dynambodb','cosmodb','cloud','sagemaker','glue','s3','efs','lambda','ethena','emr','cloudsearch','kinesis','vpc',
+'route53','cloudfront','functionapp','databricks','blob','powerbi','tableau','cdn','terraform','azure sql','data factories','data lake analytics','azure blockchain service',
+'logic apps','iaas','paas','dbaas','daas']
+
+
+overall_skills_dict = program_languages + analysis_software + ml_framework + bigdata_tool + databases + ml_platform + methodology + softwareskills + cloudskills
 education = ['master','phd','undergraduate','bachelor','mba']
 overall_dict = overall_skills_dict + education
 
@@ -72,5 +80,76 @@ def cal_similarity(resume_keywords):
     top_match = df.sort_values(by='similarity', ascending=False).head(num_jobs_return)
     # Return top matched jobs
     return top_match
+
+def keywords_count( keywords, counter):
+        '''
+        Count frequency of keywords
+        Input:
+            keywords (list): list of keywords
+            counter (Counter)
+        Output:
+            keyword_count (DataFrame index:keyword value:count)
+        '''          
+        keyword_count = pd.DataFrame(columns = ['Freq'])
+        for each_word in keywords:
+            keyword_count.loc[each_word] = {'Freq':counter[each_word]}
+        return keyword_count
+
+def exploratory_data_analysis():
+        '''
+        Exploratory data analysis
+        Input:
+            None
+        Output:
+            None
+        '''        
+        # Create a counter of keywords
+        doc_freq = Counter()
+        f = [doc_freq.update(item) for item in df['keywords']]
+       
+        # Let's look up our pre-defined skillset vocabulary in Counter
+        overall_skills_df = keywords_count(overall_skills_dict, doc_freq)
+        # Calculate percentage of required skills in all jobs
+        overall_skills_df['Freq_perc'] = (overall_skills_df['Freq'])*100/df.shape[0]
+        overall_skills_df = overall_skills_df.sort_values(by='Freq_perc', ascending=False)  
+        # Make bar plot
+        plt.figure(figsize=(14,8))
+        overall_skills_df.iloc[0:30, overall_skills_df.columns.get_loc('Freq_perc')].plot.bar()
+        plt.title('Percentage of Required Data Skills in Data Scientist/Engineer/Analyst Job Posts')
+        plt.ylabel('Percentage Required in Jobs (%)')
+        plt.xticks(rotation=30)
+        plt.savefig('static/images/first.png')
+       
+        # Plot word cloud
+        all_keywords_str = df['keywords'].apply(' '.join).str.cat(sep=' ')        
+        # lower max_font_size, change the maximum number of word and lighten the background:
+        wordcloud = WordCloud(background_color="white").generate(all_keywords_str)
+        plt.figure()
+        plt.imshow(wordcloud, interpolation="bilinear")
+        plt.axis("off")
+        plt.savefig('static/images/second.png')
+         
+        # Let's look up education requirements
+        education_df = keywords_count(education, doc_freq)
+        # Merge undergrad with bachelor
+        education_df.loc['bachelor','Freq'] = education_df.loc['bachelor','Freq'] + education_df.loc['undergraduate','Freq']
+        education_df.drop(labels='undergraduate', axis=0, inplace=True)
+        # Calculate percentage of required skills in all jobs
+        education_df['Freq_perc'] = (education_df['Freq'])*100/df.shape[0]
+        education_df = education_df.sort_values(by='Freq_perc', ascending=False)  
+        # Make bar plot
+        plt.figure(figsize=(14,8))
+        education_df['Freq_perc'].plot.bar()
+        plt.title('Percentage of Required Education in Data Scientist/Engineer/Analyst Job Posts')
+        plt.ylabel('Percentage Required in Jobs (%)')
+        plt.xticks(rotation=0)
+        plt.savefig('static/images/third.png')
+       
+        # Plot distributions of jobs posted in major cities
+        plt.figure(figsize=(9,9))
+        df['jobLocation'].value_counts().plot.pie(autopct='%1.1f%%', textprops={'fontsize': 10})
+        #plt.title('Data Scientist/Engineer/Analyst Jobs in Major Canadian Cities \n\n Total {} posted jobs in last {} days'.format(df.shape[0]))
+        plt.ylabel('')
+        plt.savefig('static/images/fourth.png')
 
 
