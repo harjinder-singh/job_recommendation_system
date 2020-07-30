@@ -7,6 +7,7 @@ import PyPDF2
 import config
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
+import seaborn as sns
 #!conda install python-snappy --y
 #!conda update -n base conda --y
 
@@ -145,11 +146,15 @@ def exploratory_data_analysis():
         plt.xticks(rotation=0)
         plt.savefig('static/images/third.png')
        
-        # Plot distributions of jobs posted in major cities
-        plt.figure(figsize=(9,9))
-        df['jobLocation'].value_counts().plot.pie(autopct='%1.1f%%', textprops={'fontsize': 10})
-        #plt.title('Data Scientist/Engineer/Analyst Jobs in Major Canadian Cities \n\n Total {} posted jobs in last {} days'.format(df.shape[0]))
-        plt.ylabel('')
+        df['City'], df['Province'] = df['joblocation'].str.split(',', 1).str
+        State_wise_job_CA = df.groupby(['Province']).size().reset_index(name='Locationwise').sort_values('Locationwise',ascending=False)
+
+        plt.figure(figsize=(12,12))
+        ax = sns.barplot(x="Province", y="Locationwise",data=Province_wise_job_CA)
+        ax.set_xticklabels(ax.get_xticklabels(), rotation=90, ha="right")
+        ax.set_title('Province wise job openings')
+        plt.tight_layout()
         plt.savefig('static/images/fourth.png')
+
 
 
