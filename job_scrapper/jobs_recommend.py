@@ -62,6 +62,8 @@ def keywords_extract(text):
 
 #creating new column in the dataframe
 df['keywords'] = [keywords_extract(job_desc) for job_desc in df['description']]
+df['City'], df['Province'] = df['joblocation'].str.split(',', 1).str
+State_wise_job_CA = df.groupby(['Province']).size().reset_index(name='Locationwise').sort_values('Locationwise',ascending=False)
 
 #similarity function
 def get_jaccard_sim(x_set, y_set):
@@ -115,7 +117,7 @@ def exploratory_data_analysis():
         overall_skills_df = overall_skills_df.sort_values(by='Freq_perc', ascending=False)  
         # Make bar plot
         plt.figure(figsize=(14,8))
-        overall_skills_df.iloc[0:30, overall_skills_df.columns.get_loc('Freq_perc')].plot.bar()
+        overall_skills_df.iloc[0:30, overall_skills_df.columns.get_loc('Freq_perc')].plot.bar(color=['black', 'red', 'blue', 'cyan', 'green', 'yellow', 'pink'])
         plt.title('Percentage of Required Data Skills in Data Scientist/Engineer/Analyst Job Posts')
         plt.ylabel('Percentage Required in Jobs (%)')
         plt.xticks(rotation=30)
@@ -145,16 +147,14 @@ def exploratory_data_analysis():
         plt.ylabel('Percentage Required in Jobs (%)')
         plt.xticks(rotation=0)
         plt.savefig('static/images/third.png')
-       
-        df['City'], df['Province'] = df['joblocation'].str.split(',', 1).str
-        State_wise_job_CA = df.groupby(['Province']).size().reset_index(name='Locationwise').sort_values('Locationwise',ascending=False)
 
         plt.figure(figsize=(12,12))
-        ax = sns.barplot(x="Province", y="Locationwise",data=Province_wise_job_CA)
+        ax = sns.barplot(x="Province", y="Locationwise",data=State_wise_job_CA)
         ax.set_xticklabels(ax.get_xticklabels(), rotation=90, ha="right")
         ax.set_title('Province wise job openings')
         plt.tight_layout()
         plt.savefig('static/images/fourth.png')
+
 
 
 
