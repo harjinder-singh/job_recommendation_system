@@ -88,7 +88,7 @@ def keywords_count( keywords, counter):
         '''
         Count frequency of keywords
         Input:
-            keywords (list): list of keywords
+            keyword (list): list of keywords
             counter (Counter)
         Output:
             keyword_count (DataFrame index:keyword value:count)
