@@ -94,121 +94,90 @@
   </header>
   <!-- header end -->
 
-  <!-- Start Slider Area -->
-  <div id="home" class="slider-area">
-    <div class="bend niceties preview-2">
-      <div id="ensign-nivoslider" class="slides">
-        <img src="{% static 'img/slider/slider1.jpg' %}" alt="" title="#slider-direction-1" />
-        <img src="{% static 'img/slider/slider2.jpg' %}" alt="" title="#slider-direction-2" />
-        <img src="{% static 'img/slider/slider3.jpg' %}" alt="" title="#slider-direction-3" />
-      </div>
-
-      <!-- direction 1 -->
-      <div id="slider-direction-1" class="slider-direction slider-one">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="slider-content">
-                <!-- layer 1 -->
-                <div class="layer-1-1 hidden-xs wow slideInDown" data-wow-duration="2s" data-wow-delay=".2s">
-                  <h2 class="title1">We are here to help you</h2>
-                </div>
-                <!-- layer 2 -->
-                <div class="layer-1-2 wow slideInUp" data-wow-duration="2s" data-wow-delay=".1s">
-                  <h1 class="title2">To Get Best Fit For you</h1>
-                </div>
-                <!-- layer 3 -->
-                <div class="layer-1-3 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
-                  <a class="ready-btn right-btn page-scroll" href="#services">See Services</a>
-                  <a class="ready-btn page-scroll" href="#about">Learn More</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- direction 2 -->
-      <div id="slider-direction-2" class="slider-direction slider-two">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="slider-content text-center">
-                <!-- layer 1 -->
-                <div class="layer-1-1 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
-                  <h2 class="title1">Our Moto</h2>
-                </div>
-                <!-- layer 2 -->
-                <div class="layer-1-2 wow slideInUp" data-wow-duration="2s" data-wow-delay=".1s">
-                  <h1 class="title2">Choose a job you love and you will never have to work a day in your life</h1>
-                </div>
-                <!-- layer 3 -->
-                <div class="layer-1-3 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
-                  <a class="ready-btn right-btn page-scroll" href="#services">See Services</a>
-                  <a class="ready-btn page-scroll" href="#about">Learn More</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- direction 3 -->
-      <div id="slider-direction-3" class="slider-direction slider-two">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="slider-content">
-                <!-- layer 1 -->
-                <div class="layer-1-1 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
-                  <h2 class="title1">Dream Big! Set Goals! Take Action!</h2>
-                </div>
-                <!-- layer 2 -->
-                <div class="layer-1-2 wow slideInUp" data-wow-duration="2s" data-wow-delay=".1s">
-                  <h1 class="title2">Make your Career a HIT with BEST FIT !</h1>
-                </div>
-                <!-- layer 3 -->
-                <div class="layer-1-3 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
-                  <a class="ready-btn right-btn page-scroll" href="#services">See Services</a>
-                  <a class="ready-btn page-scroll" href="#about">Learn More</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Slider Area -->
+  
 
   <!-- Start  Job recommend Form -->
-  <div class="row">
+  <div class="row" style="margin-top: 10%;margin-bottom: 5%;">
         {% if jobs.any%}
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Job Title</th>
-                    <th>Job Location</th>
-                    <th>Company</th>
-                    <th>Match</th>
-                </tr>
-                </thead>
-                <tbody>
-                    {%for job in jobs%}
-                        <tr>
-                            <td>{{job.5}}</td>
-                            <td>{{job.4}}</td>
-                            <td>{{job.1}}</td>
-                            <td>{{job.9|floatformat:2}}</td>
-                        </tr>
-                    {%endfor%}
-                </tbody>
-            </table>
-            <img src="{% static 'images/first.png'%}" alt="" width="500" height="600"> 
-            <img src="{% static 'images/second.png'%}" alt="" width="500" height="600"> 
-            <img src="{% static 'images/third.png'%}" alt="" width="500" height="600"> 
-            <img src="{% static 'images/fourth.png'%}" alt="" width="500" height="600">
-            <a href="/" class="btn btn--radius-2 btn--red" >Back</a>
+            <div class="col-md-2 col-sm-2 col-xs-12"></div>
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Job Title</th>
+                        <th>Job Location</th>
+                        <th>Company</th>
+                        <th>Match</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {%for job in jobs%}
+                            <tr>
+                                <td>{{job.5}}</td>
+                                <td>{{job.4}}</td>
+                                <td>{{job.1}}</td>
+                                <td>{{job.11|floatformat:2}}</td>
+                            </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-12"></div>
+            <div id="team" class="our-team-area area-padding">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div class="section-headline text-center">
+                            <h2>TrendS</h2>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="team-top">
+                          <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="single-team-member">
+                              <div class="team-img">
+                                    <a href="#">
+                                        <img src="{% static 'images/first.png'%}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                          </div>
+                          <!-- End column -->
+                          <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="single-team-member">
+                                    <div class="team-img">
+                                        <a href="#">
+                                            <img src="{% static 'images/second.png'%}" alt="">
+                                        </a>
+                                    </div>
+                            </div>
+                          </div>
+                          <!-- End column -->
+                          <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="single-team-member">
+                              <div class="team-img">
+                                <a href="#">
+                                    <img src="{% static 'images/third.png' %}" alt="">
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- End column -->
+                          <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="single-team-member">
+                              <div class="team-img">
+                                <a href="#">
+                                    <img src="{% static 'images/fourth.png' %}" alt="">
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- End column -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
         {%else%}
             <div class="col-md-2 col-sm-2 col-xs-12"></div>
             <div class="col-md-8 col-sm-8 col-xs-12">
@@ -235,100 +204,7 @@
         {%endif%}
     </div>
   <!-- End Job Recommend Form -->
-
-  <!-- Start contact Area -->
-  <div id="contact" class="contact-area">
-    <div class="contact-inner area-padding">
-      <div class="contact-overly"></div>
-      <div class="container ">
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="section-headline text-center">
-              <h2>Contact us</h2>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <!-- Start contact icon column -->
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="contact-icon text-center">
-              <div class="single-icon">
-                <i class="fa fa-mobile"></i>
-                <p>
-                  Call: +1 5589 55488 55<br>
-                  <span>Monday-Friday (9am-5pm)</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- Start contact icon column -->
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="contact-icon text-center">
-              <div class="single-icon">
-                <i class="fa fa-envelope-o"></i>
-                <p>
-                  Email: info@example.com<br>
-                  <span>Web: www.example.com</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- Start contact icon column -->
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="contact-icon text-center">
-              <div class="single-icon">
-                <i class="fa fa-map-marker"></i>
-                <p>
-                  Location: A108 Adam Street<br>
-                  <span>NY 535022, USA</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-
-          <!-- Start Google Map -->
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <!-- Start Map -->
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22864.11283411948!2d-73.96468908098944!3d40.630720240038435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2sbg!4v1540447494452" width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
-            <!-- End Map -->
-          </div>
-          <!-- End Google Map -->
-
-          <!-- Start  contact -->
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="form contact-form">
-              <div id="sendmessage">Your message has been sent. Thank you!</div>
-              <div id="errormessage"></div>
-              <form action="" method="post" role="form" class="contactForm">
-                <div class="form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                  <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                  <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                  <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                  <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
-                  <div class="validation"></div>
-                </div>
-                <div class="text-center"><button type="submit">Send Message</button></div>
-              </form>
-            </div>
-          </div>
-          <!-- End Left contact -->
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Contact Area -->
-
+ 
   <!-- Start Footer bottom Area -->
   <footer>
     <div class="footer-area">
