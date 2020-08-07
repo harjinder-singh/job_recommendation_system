@@ -7,9 +7,13 @@ from job_scrapper.jobs_recommend import *
 # Create your views here.
 
 def index(request):
+    return render(request, 'index.html')
+
+def job_recommendation(request):
     jobs = []
     if(request.POST):
         jobs = cal_similarity(request.POST['skills'].split(',') )
         jobs = jobs.to_numpy()
         exploratory_data_analysis()
-    return render(request, 'index.html', {'jobs': jobs})
+    return render(request, 'job_recommend.html', {'jobs': jobs})
+
