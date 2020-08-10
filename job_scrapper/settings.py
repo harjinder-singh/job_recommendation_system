@@ -74,16 +74,16 @@ WSGI_APPLICATION = 'job_scrapper.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'job_scrapper_dev',
-        'USER': 'harry',
-        'PASSWORD': 'harry',
-        'HOST': 'localhost',
-        'PORT' : '5432'
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'job_scrapper_dev',
+#         'USER': 'harry',
+#         'PASSWORD': 'harry',
+#         'HOST': 'localhost',
+#         'PORT' : '5432'
+#     }
+# }
 
 
 # Password validation
