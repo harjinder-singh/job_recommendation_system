@@ -21,7 +21,7 @@
 										<span class="icon-bar"></span>
 									</button>
                 <!-- Brand -->
-                <a class="navbar-brand page-scroll sticky-logo" href="index.html">
+                <a class="navbar-brand page-scroll sticky-logo" href="/">
                   <h1><span>Job</span> Recommendation</h1>
                   <!-- Uncomment below if you prefer to use an image logo -->
                   <!-- <img src="img/logo.png" alt="" title=""> -->
@@ -34,7 +34,7 @@
                     <a href="/">Home</a>
                   </li>
                   <li class="active">
-                    <a href="/job_recommend.html">Job Recommend</a>
+                    <a href="/job_recommend">Job Recommend</a>
                   </li>
                 </ul>
               </div>
@@ -52,36 +52,51 @@
   <!-- Start  Job recommend Form -->
   <div class="row" style="margin-top: 10%;margin-bottom: 5%;">
         {% if jobs.any%}
-            <div class="col-md-2 col-sm-2 col-xs-12"></div>
-            <div class="col-md-8 col-sm-8 col-xs-12">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Job Title</th>
-                        <th>Job Location</th>
-                        <th>Company</th>
-                        <th>Match</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {%for job in jobs%}
+            <div id="team" class="our-team-area">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="section-headline text-center">
+                      <h2>Jobs Recommended based on your skills</h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="team-top">
+                    <div class="col-md-2 col-sm-2 col-xs-12"></div>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <table class="table table-bordered">
+                            <thead>
                             <tr>
-                                <td>{{job.5}}</td>
-                                <td>{{job.4}}</td>
-                                <td>{{job.1}}</td>
-                                <td>{{job.11|floatformat:2}}</td>
+                                <th>Job Title</th>
+                                <th>Job Location</th>
+                                <th>Company</th>
+                                <th>Match</th>
                             </tr>
-                        {%endfor%}
-                    </tbody>
-                </table>
+                            </thead>
+                            <tbody>
+                                {%for job in jobs%}
+                                    <tr>
+                                        <td>{{job.5}}</td>
+                                        <td>{{job.4}}</td>
+                                        <td>{{job.1}}</td>
+                                        <td>{{job.11|floatformat:2}}</td>
+                                    </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-12"></div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="col-md-2 col-sm-2 col-xs-12"></div>
             <div id="team" class="our-team-area area-padding">
               <div class="container">
                 <div class="row">
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="section-headline text-center">
-                      <h2>TrendS</h2>
+                      <h2>Job Trends</h2>
                     </div>
                   </div>
                 </div>
@@ -133,28 +148,31 @@
               </div>
             </div>
         {%else%}
-            <div class="col-md-2 col-sm-2 col-xs-12"></div>
-            <div class="col-md-8 col-sm-8 col-xs-12">
+            <h1 style="margin-left: auto; margin-top: 50px;text-align: center;font-weight: 100;font-size: 2.8em;color: Black;">
+                Enter Details to find jobs fit for you!!
+            </h1>
+            <div class="col-md-3 col-sm-3 col-xs-12"></div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="form contact-form">
                     <form method="POST" id="recommend_form">
                         {% csrf_token%}
                         <div class="form-group">
                             <label >Name</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"/>
+                            <input type="text" name="name" class="formStyle" id="name" placeholder="Your Name"/>
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email"/>
+                            <input type="email" class="formStyle" name="email" id="email" placeholder="Your Email"/>
                         </div>
                         <div class="form-group">
                             <label>Your Skills</label>
-                            <input type="text" class="form-control" data-role="tagsinput" name="skills" />
+                            <input type="text" class="formStyle" data-role="tagsinput" name="skills" />
                         </div>
-                        <div class="text-center"><button id="find_job" type="button">Find Jobs</button></div>
+                        <div class="text-center"><button id="find_job" type="button" class="formButton">Find Jobs</button></div>
                     </form>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-2 col-xs-12"></div>
+            <div class="col-md-3 col-sm-3 col-xs-12"></div>
         {%endif%}
   </div>
   <!-- End Job Recommend Form -->

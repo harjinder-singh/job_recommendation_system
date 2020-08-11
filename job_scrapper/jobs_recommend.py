@@ -118,8 +118,8 @@ def exploratory_data_analysis():
         # Make bar plot
         plt.figure(figsize=(14,8))
         overall_skills_df.iloc[0:30, overall_skills_df.columns.get_loc('Freq_perc')].plot.bar(color=['black', 'red', 'blue', 'cyan', 'green', 'yellow', 'pink'])
-        plt.title('Percentage of Required Data Skills in Data Scientist/Engineer/Analyst Job Posts')
-        plt.ylabel('Percentage Required in Jobs (%)')
+        plt.title('Percentage of Required Data Skills in Data Scientist/Engineer/Analyst Job Posts', fontsize=20)
+        plt.ylabel('Percentage Required in Jobs (%)', fontsize=20)
         plt.xticks(rotation=30)
         plt.savefig('static/images/first.png')
        
@@ -127,7 +127,7 @@ def exploratory_data_analysis():
         all_keywords_str = df['keywords'].apply(' '.join).str.cat(sep=' ')        
         # lower max_font_size, change the maximum number of word and lighten the background:
         wordcloud = WordCloud(background_color="white").generate(all_keywords_str)
-        plt.figure()
+        plt.figure(figsize=(14,8))
         plt.imshow(wordcloud, interpolation="bilinear")
         plt.axis("off")
         plt.savefig('static/images/second.png')
@@ -143,8 +143,8 @@ def exploratory_data_analysis():
         # Make bar plot
         plt.figure(figsize=(14,8))
         education_df['Freq_perc'].plot.bar()
-        plt.title('Percentage of Required Education in Data Scientist/Engineer/Analyst Job Posts', fontsize=40)
-        plt.ylabel('Percentage Required in Jobs (%)', fontsize=40)
+        plt.title('Percentage of Required Education in Data Scientist/Engineer/Analyst Job Posts', fontsize=20)
+        plt.ylabel('Percentage Required in Jobs (%)', fontsize=20)
         plt.xticks(rotation=0)
         plt.savefig('static/images/third.png')
 

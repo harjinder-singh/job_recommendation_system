@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('job_recommend', views.job_recommendation, name='job_recommend'),
+    path('email', views.email, name='email'),
 ]
