@@ -7,25 +7,25 @@ import PyPDF2
 import config
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
-#import seaborn as sns
-#!conda install python-snappy --y
-#!conda update -n base conda --y
+import seaborn as sns
+# # #!conda install python-snappy --y
+# # #!conda update -n base conda --y
 
-# import s3fs
-# import fastparquet as fp
-# s3 = s3fs.S3FileSystem()
-# fs = s3fs.core.S3FileSystem()
+import s3fs
+import fastparquet as fp
+s3 = s3fs.S3FileSystem()
+fs = s3fs.core.S3FileSystem()
 
-# #mybucket/data_folder/serial_number=1/cur_date/abcdsd0324324.snappy.parquet
-# s3_path = "s3://capstone-s3/Jobs_Canada/part-*.parquet"
-# all_paths_from_s3 = fs.glob(path=s3_path)
+#mybucket/data_folder/serial_number=1/cur_date/abcdsd0324324.snappy.parquet
+s3_path = "s3://capstone-s3/Jobs_Canada/part-*.parquet"
+all_paths_from_s3 = fs.glob(path=s3_path)
 
-# myopen = s3.open
-# #use s3fs as the filesystem
-# fp_obj = fp.ParquetFile(all_paths_from_s3,open_with=myopen)
-# #convert to pandas dataframe
-# df = fp_obj.to_pandas()
-df = pd.read_csv(r'job_scrapper/jobsCanada.csv')
+myopen = s3.open
+#use s3fs as the filesystem
+fp_obj = fp.ParquetFile(all_paths_from_s3,open_with=myopen)
+#convert to pandas dataframe
+df = fp_obj.to_pandas()
+#df = pd.read_csv(r'job_scrapper/jobsCanada.csv')
 #Addind Index Column in data frame
 df['idx'] = range(1, len(df) + 1)
 
@@ -62,7 +62,7 @@ def keywords_extract(text):
 
 #creating new column in the dataframe
 df['keywords'] = [keywords_extract(job_desc) for job_desc in df['description']]
-df['City'], df['Province'] = df['jobLocation'].str.split(',', 1).str
+df['City'], df['Province'] = df['joblocation'].str.split(',', 1).str
 State_wise_job_CA = df.groupby(['Province']).size().reset_index(name='Locationwise').sort_values('Locationwise',ascending=False)
 
 #similarity function
@@ -148,12 +148,12 @@ def exploratory_data_analysis():
         plt.xticks(rotation=0)
         plt.savefig('static/images/third.png')
 
-        # plt.figure(figsize=(12,12))
-        # ax = sns.barplot(x="Province", y="Locationwise",data=State_wise_job_CA)
-        # ax.set_xticklabels(ax.get_xticklabels(), rotation=90, ha="right")
-        # ax.set_title('Province wise job openings')
-        # plt.tight_layout()
-        # plt.savefig('static/images/fourth.png')
+        plt.figure(figsize=(14,8))
+        ax = sns.barplot(x="Province", y="Locationwise",data=State_wise_job_CA)
+        ax.set_xticklabels(ax.get_xticklabels(), rotation=90, ha="right")
+        ax.set_title('Province wise job openings')
+        plt.tight_layout()
+        plt.savefig('static/images/fourth.png')
 
 
 
