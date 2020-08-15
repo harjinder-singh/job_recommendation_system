@@ -154,21 +154,24 @@
             <div class="col-md-3 col-sm-3 col-xs-12"></div>
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="form contact-form">
-                    <form method="POST" id="recommend_form">
+                    <form method="POST" class="recommendForm" id="job_recommend">
                         {% csrf_token%}
                         <div class="form-group">
                             <label >Name</label>
-                            <input type="text" name="name" class="formStyle" id="name" placeholder="Your Name"/>
-                        </div>
+                            <input type="text" name="name" class="formStyle" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter your name"/>
+                            <div class="validation"></div>
+                          </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="formStyle" name="email" id="email" placeholder="Your Email"/>
-                        </div>
+                            <input type="email" class="formStyle" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email"/>
+                            <div class="validation"></div>
+                          </div>
                         <div class="form-group">
                             <label>Your Skills</label>
-                            <input type="text" class="formStyle" data-role="tagsinput" name="skills" />
-                        </div>
-                        <div class="text-center"><button id="find_job" type="button" class="formButton">Find Jobs</button></div>
+                            <input type="text" class="formStyle" data-role="tagsinput" name="skills" data-rule="minlen:2" data-msg="Please enter a skill to continue"/>
+                            <div class="validation"></div>
+                          </div>
+                        <div class="text-center"><button type="submit" class="formButton" >Find Jobs</button></div>
                     </form>
                 </div>
             </div>

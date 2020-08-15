@@ -3,6 +3,7 @@ from scrapper.models import *
 from job_scrapper.jobs_recommend import *
 from django.core.mail import send_mail
 from django.conf import settings
+from django.http.response import JsonResponse
 
 # Create your views here.
 
@@ -24,4 +25,4 @@ def email(request):
     email_from = request.POST['email']
     recipient_list = ['job.recommendation.help@gmail.com',]
     send_mail( subject, 'Message received from '+ name + ' email: ' + email_from+ ' Message: '+ message, email_from, recipient_list )
-    return render(request, 'index.html')
+    return JsonResponse({'success':'OK', 'ok': 'ok'})
